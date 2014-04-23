@@ -35,31 +35,37 @@ class monologColorFormatter extends NormalizerFormatter
     /**
      * {@inheritdoc}
      */
-    public function format(array $record)
-    {
-#        var_dump($record);
-        $level = $record['level'];
-        $colors = $this->colors[$level];
-        $ret = $record['datetime']->format('Y-m-d H:i:s') . ' ';
-        $I = $colors[2];
-        $FG = $colors[0];
-        $BG = $colors[1];
-        $this->checkMemory($record['extra'],$ret);
-        $colorstring="\033[" . $I . ';3' . $BG . "m\033[4" . $FG . "m ";
+	public function format(array $record)
+	{
+		$level = $record['level'];
+		$colors = $this->colors[$level];
+		$ret = $this->getTime($record);
+		$I = $colors[2];
+		$FG = $colors[0];
+		$BG = $colors[1];
+		$this->checkMemory($record['extra'],$ret);
+		$colorstring="\033[" . $I . ';3' . $BG . "m\033[4" . $FG . "m ";
 		$ret .= $colorstring . strtoupper(substr($record['level_name'], 0, 1));
-        $scolor = "\033[" . $I . ';3' . $FG . "m";
-        if(isset($colors[3]) && $colors[3]==true){
-            $scolor .= $colorstring;
-        }
-        $ret .= " \033[0m" . ' ';
-        $ret .= "[" . $record['channel'] . "] ";
-        $ret .= $scolor . $record['message'];
-        $ret .= " \033[0m" . PHP_EOL;
-        return $ret;
-    }
-    private function checkMemory(array $recordExtra,&$ret){
-        if(array_key_exists('memory_usage',$recordExtra)){
-            $ret.='[ '.sprintf("%7s",$recordExtra['memory_usage']).' ] ';
-        }
-    }
+		$scolor = "\033[" . $I . ';3' . $FG . "m";
+		if(isset($colors[3]) && $colors[3]==true){
+			$scolor .= $colorstring;
+		}
+		$ret .= " \033[0m" . ' ';
+		$ret .= "[" . $record['channel'] . "] ";
+		$ret .= $scolor . $record['message'];
+		$ret .= " \033[0m" . PHP_EOL;
+		return $ret;
+	}
+	private function checkMemory(array $recordExtra,&$ret){
+		if(array_key_exists('memory_usage',$recordExtra)){
+			$ret.='[ '.sprintf("%7s",$recordExtra['memory_usage']).' ] ';
+		}
+	}
+	private function getTime(array $record){
+		if(array_key_exists('time_since_exec',$record['extra'])){
+			return sprintf('[ %-20s ]',$record['extra']['time_since_exec']);
+		}else{
+			return $record['datetime']->format('Y-m-d H:i:s') . ' ';
+		}
+	}
 }
