@@ -1,0 +1,30 @@
+{
+    "name": "mahlstrom/monolog-color-formatter",
+    "description": "Library for accessing remote files",
+    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "Magnus Ahlstrom",
+            "email": "magnus@atuin.se"
+        }
+    ],
+    "license": "MIT",
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
+    },
+    "require": {
+        "monolog/monolog": "1.8.0"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/Mahlstrom/Remote.git"
+        }
+    ],
+    "autoload": {
+        "classmap": ["lib"],
+        "psr-4": {
+            "mahlstrom\\": "src/mahlstrom/"
+        }
+    }
+}
