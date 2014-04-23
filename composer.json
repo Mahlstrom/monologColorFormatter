@@ -22,9 +22,8 @@
         }
     ],
     "autoload": {
-        "classmap": ["lib"],
         "psr-4": {
-            "mahlstrom\\": "src/mahlstrom/"
+            "mahlstrom\\monolog\\": "src/"
         }
     }
 }

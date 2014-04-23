@@ -45,10 +45,11 @@ class monologColorFormatter extends NormalizerFormatter
         $FG = $colors[0];
         $BG = $colors[1];
         $this->checkMemory($record['extra'],$ret);
-        $ret .= "\033[" . $I . ';3' . $BG . "m\033[4" . $FG . "m " . strtoupper(substr($record['level_name'], 0, 1));
+        $colorstring="\033[" . $I . ';3' . $BG . "m\033[4" . $FG . "m ";
+		$ret .= $colorstring . strtoupper(substr($record['level_name'], 0, 1));
         $scolor = "\033[" . $I . ';3' . $FG . "m";
         if(isset($colors[3]) && $colors[3]==true){
-            $scolor .= "\033[" . $I . ';3' . $BG . "m\033[4" . $FG . "m ";
+            $scolor .= $colorstring;
         }
         $ret .= " \033[0m" . ' ';
         $ret .= "[" . $record['channel'] . "] ";
