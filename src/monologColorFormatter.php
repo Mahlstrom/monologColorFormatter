@@ -13,28 +13,28 @@ use Monolog\Formatter\NormalizerFormatter;
 
 class monologColorFormatter extends NormalizerFormatter
 {
-    public $colors = array(
-        // 0 BLACK
-        // 1 RED
-        // 2 GREEN
-        // 3 YELLOW
-        // 4 BLUE
-        // 5 PURPLE
-        // 6 CYAN
-        // 7 WHITE
-        LOGGER::DEBUG => array(7, 0, 0),
-        LOGGER::INFO => array(6, 0, 0),
-        LOGGER::NOTICE => array(2, 7, 0),
-        LOGGER::WARNING => array(3, 4, 1),
-        LOGGER::ERROR => array(1, 7, 0, true),
-        LOGGER::CRITICAL => array(6, 0, 0, true),
-        LOGGER::ALERT => array(5, 7, 0, true),
-        LOGGER::EMERGENCY => array(1, 7, 1, true),
-    );
+	public $colors = array(
+		// 0 BLACK
+		// 1 RED
+		// 2 GREEN
+		// 3 YELLOW
+		// 4 BLUE
+		// 5 PURPLE
+		// 6 CYAN
+		// 7 WHITE
+		LOGGER::DEBUG => array(7, 0, 0),
+		LOGGER::INFO => array(6, 0, 0),
+		LOGGER::NOTICE => array(2, 7, 0),
+		LOGGER::WARNING => array(3, 4, 1),
+		LOGGER::ERROR => array(1, 7, 0, true),
+		LOGGER::CRITICAL => array(6, 0, 0, true),
+		LOGGER::ALERT => array(5, 7, 0, true),
+		LOGGER::EMERGENCY => array(1, 7, 1, true),
+	);
 
-    /**
-     * {@inheritdoc}
-     */
+	/**
+	 * {@inheritdoc}
+	 */
 	public function format(array $record)
 	{
 		$level = $record['level'];
@@ -58,7 +58,7 @@ class monologColorFormatter extends NormalizerFormatter
 	}
 	private function checkMemory(array $recordExtra,&$ret){
 		if(array_key_exists('memory_usage',$recordExtra)){
-			$ret.='[ '.sprintf("%7s",$recordExtra['memory_usage']).' ] ';
+			$ret.='[ '.sprintf("%9s",$recordExtra['memory_usage']).' ] ';
 		}
 	}
 	private function getTime(array $record){
