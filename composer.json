@@ -13,14 +13,8 @@
         "phpunit/phpunit": "3.7.*"
     },
     "require": {
-        "monolog/monolog": "1.8.0"
+      "monolog/monolog": "~1.8"
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/Mahlstrom/Remote.git"
-        }
-    ],
     "autoload": {
         "psr-4": {
             "mahlstrom\\monolog\\": "src/"
